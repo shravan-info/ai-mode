@@ -46,7 +46,7 @@ const seedExamples: Record<Intent, string[]> = {
   summary: ['summarize this topic','short note on water cycle','पाण्याच्या चक्राचा सारांश','थोडक्यात माहिती'],
   general: ['tell me about knowledge','भारताची माहिती','give information about computers'],
 };
-const vocab = Array.from(new Set(Object.values(seedExamples).flatMap(tokens))).slice(0, 180);
+const vocab = Array.from(new Set(Object.values(seedExamples).flatMap(examples => examples.flatMap(tokens)))).slice(0, 180);
 const rand = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return (x - Math.floor(x)) * 0.16 - 0.08; };
 const inputN = vocab.length, hiddenN = 32, outputN = labels.length;
 const w1 = Array.from({length: inputN * hiddenN}, (_, i) => rand(i + 1));
