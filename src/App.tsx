@@ -60,7 +60,7 @@ export default function App() {
         {turns.map(t=><article className="turn" key={t.id}>
           <div className="question-row"><div className="user-avatar">S</div><h2>{t.question}</h2></div>
           {t.loading?<div className="thinking"><span/><span/><span/> Searching knowledge and composing an answer…</div>:<>
-            <div className="answer-head"><span className="answer-icon"><Sparkles size={16}/></span><b>GLE Answer</b><span className="verified"><Check size={12}/> Evidence-linked</span></div>
+            <div className="answer-head"><span className="answer-icon"><Sparkles size={16}/></span><b>GLE Answer</b><span className="verified">{t.mode === "evidence-grounded" ? <><Check size={12}/> Evidence-linked</> : "Limited evidence"}</span></div>
             <div className="gle-diagnostics">{t.diagnostics}</div>
             <div className="answer-text">{t.answer.split('\n').map((p,i)=>p&&<p key={i} className={p.includes('·')?'answer-note':undefined}>{p}</p>)}</div>
             <div className="sources-heading"><BookOpen size={16}/> Sources <span>{t.sources.length}</span></div>
