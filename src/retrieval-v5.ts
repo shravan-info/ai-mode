@@ -22,6 +22,8 @@ const ALIASES: Record<string, string[]> = {
   'राज्यघटना':['constitution','संविधान','indian constitution'],
   'वैशिष्ट्ये':['features','characteristics','प्रमुख गुणधर्म'],
   'माणगाव':['mangaon','mangaon taluka'],
+  'तालुक्याची':['taluka','तालुका'], 'तालुक्याचा':['taluka','तालुका'], 'तालुक्यातील':['taluka','तालुका'],
+  'पृथ्वीवर':['earth','planet','पृथ्वी'],
   'गुरुत्वाकर्षण':['gravity','gravitation'],
   'प्रकाशसंश्लेषण':['photosynthesis'],
   'लोकशाही':['democracy'],
@@ -120,11 +122,16 @@ async function loadFactpediaTree(): Promise<any[]> {
   return treePromise;
 }
 
+function containsTerm(text:string, term:string):boolean {
+  const normalized = normalizeQuery(text);
+  const needle = normalizeQuery(term);
+  if (!needle) return false;
+  const padded = ' ' + normalized.replace(/[^\\p{L}\\p{N}]+/gu,' ') + ' ';
+  return padded.includes(' ' + needle + ' ');
+}
 function scoreFact(queryTerms:string[], title:string, body:string):number {
-  const titleNorm = normalizeQuery(title);
-  const bodyNorm = normalizeQuery(body);
-  const titleHits = queryTerms.filter(t => titleNorm.includes(t)).length;
-  const bodyHits = queryTerms.filter(t => bodyNorm.includes(t)).length;
+  const titleHits = queryTerms.filter(t => containsTerm(title,t)).length;
+  const bodyHits = queryTerms.filter(t => containsTerm(body,t)).length;
   const titleCoverage = queryTerms.length ? titleHits/queryTerms.length : 0;
   const bodyCoverage = queryTerms.length ? bodyHits/queryTerms.length : 0;
   return titleCoverage*0.72 + bodyCoverage*0.28;
@@ -156,7 +163,7 @@ async function factpediaSearch(query:string):Promise<Source[]> {
         const title = String(r.title ?? '');
         const text = String(r.content ?? r.text ?? r.summary ?? '');
         return {r,i,title,text,score:scoreFact(terms,title,text)};
-      }).filter(x => x.score >= 0.12).sort((a,b)=>b.score-a.score).slice(0,8);
+      }).filter(x => x.score >= 0.06).sort((a,b)=>b.score-a.score).slice(0,8);
       if (matches.length) return matches.map(({r,i,title,text,score}) => ({
         id:'factpedia-index-'+i,title,url:r.url ?? '#',extract:text.slice(0,12000),
         provider:'Factpedia' as const,language:(r.language?.startsWith('mr') || /[\u0900-\u097F]/.test(title+' '+text) ? 'mr':'en') as 'mr'|'en',score,
@@ -170,13 +177,13 @@ async function factpediaSearch(query:string):Promise<Source[]> {
     return {file,title,score:scoreFact(terms,title,'')};
   }).filter((x:any)=>x.score>0).sort((a:any,b:any)=>b.score-a.score).slice(0,10);
 
-  const records = await Promise.all(ranked.map(async ({file,score}:any) => {
+  const records = await Promise.all(ranked.map(async ({file}:any) => {
     const rawUrl = 'https://raw.githubusercontent.com/shravan-info/factpedia-mr/main/' + String(file.path).split('/').map(encodeURIComponent).join('/');
     const response = await fetch(rawUrl);
     if (!response.ok) return null;
     const parsed = extractFactText(await response.text(),String(file.path));
     const finalScore = scoreFact(terms,parsed.title,parsed.text);
-    if (!parsed.text || finalScore < 0.12) return null;
+    if (!parsed.text || finalScore < 0.06) return null;
     return {
       id:'factpedia-'+file.sha,title:parsed.title,
       url:'https://github.com/shravan-info/factpedia-mr/blob/main/'+file.path,

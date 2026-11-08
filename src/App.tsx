@@ -3,7 +3,7 @@ import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Searc
 import { RULE_BANK } from './engine';
 import { buildContextualQuery } from './gle-v3';
 import { searchKnowledgeV5 } from './retrieval-v5';
-import { generateGLEv5Response, getGLEv5Diagnostics } from './gle-v5';
+import { generateGLEv5ppResponse, getGLEv5ppDiagnostics } from './gle-v5pp';
 
 type Turn = { id:number; question:string; answer:string; sources:import('./engine').Source[]; loading?:boolean; language:'mr'|'en'|'mixed'; diagnostics?:string; confidence?:number; mode?:'evidence-grounded'|'insufficient-evidence'; evidenceSummary?:string };
 const starters = [
@@ -33,9 +33,9 @@ export default function App() {
       const previousContext=turns.filter(t=>!t.loading).slice(-4).map(t=>({question:t.question,answer:t.answer}));
       const contextual=buildContextualQuery(q,previousContext);
       const result=await searchKnowledgeV5(contextual.query);
-      const generated=generateGLEv5Response(q,result,language==='auto'?result.language:language);
+      const generated=generateGLEv5ppResponse(q,result,language==='auto'?result.language:language);
       const retrievalSummary='Wikipedia Marathi: '+result.wikiMrCount+' · Wikipedia English: '+result.wikiEnCount+' · Factpedia: '+result.factpediaCount+(result.errors.length?' · Warnings: '+result.errors.join(', '):'');
-      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEv5Diagnostics(generated,result),confidence:generated.confidence,mode:generated.mode,evidenceSummary:retrievalSummary}:t));
+      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEv5ppDiagnostics(generated,result),confidence:generated.confidence,mode:generated.mode,evidenceSummary:retrievalSummary}:t));
     } catch {
       setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:'Search could not be completed. Check your connection and try again.',loading:false,mode:'insufficient-evidence'}:t));
     } finally { setBusy(false); }
@@ -78,7 +78,7 @@ export default function App() {
         <SearchBox query={query} setQuery={setQuery} submit={submit} busy={busy} compact/>
       </section>}
     </main>
-    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v5++ · {RULE_BANK.length.toLocaleString()}+ logic signals · Wikipedia + Factpedia retrieval · Evidence-grounded answers.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
+    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v5+++ · {RULE_BANK.length.toLocaleString()}+ logic signals · Wikipedia + Factpedia retrieval · Evidence-grounded answers.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
     {menu&&<div className="history-pop"><div className="history-head">Recent searches <button onClick={()=>setMenu(false)}><X size={15}/></button></div>{history.length?history.map((h,i)=><button key={i} onClick={()=>{void ask(h);setMenu(false)}}><Clock3 size={14}/>{h}</button>):<p>No recent searches</p>}</div>}
   </div>;
 }
