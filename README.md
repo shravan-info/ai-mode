@@ -23,7 +23,7 @@ npm run build
 - A compact trainable MLP neural network for intent classification. This is a real neural classifier for routing, not a generative language model.
 - An extensible rule bank with 2,400 weighted bilingual lexical-combination signals.
 - Hybrid retrieval, relevance ranking, deduplication, source snippets and citations.
-- Evidence-based extractive answer synthesis.
+- GLE v1: intent-aware, bilingual, evidence-grounded response generation with sentence selection, deduplication, structured sections, and confidence diagnostics.\n- Safe fallback when source evidence is insufficient; no fabricated facts.
 
 ## Important limitation
 A 2,400-signal rule bank and a small intent classifier do not equal GPT-3. GPT-level open-ended generation requires a large trained language model. The architecture is ready for a generative model provider to be connected later.
