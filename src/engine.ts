@@ -157,23 +157,51 @@ export function buildAnswer(query: string, sources: Source[], language: Language
 
 type FactRecord = {title:string; content?:string; text?:string; url?:string; language?:string; summary?:string};
 const FACTPEDIA_URL = (import.meta as any).env?.VITE_FACTPEDIA_INDEX_URL || '/factpedia-index.json';
+let factpediaTreeCache: Promise<any[]> | null = null;
+async function loadFactpediaTree(): Promise<any[]> {
+  if (!factpediaTreeCache) factpediaTreeCache = (async () => {
+    const res = await fetch('https://api.github.com/repos/shravan-info/factpedia-mr/git/trees/main?recursive=1', {headers:{Accept:'application/vnd.github+json'}});
+    if (!res.ok) throw new Error('Factpedia repository tree unavailable');
+    const data = await res.json();
+    return (data.tree ?? []).filter((f:any) => f.type === 'blob' && /\.(html?|md|json)$/i.test(f.path) && !/(readme|license|package|config|template|index\.html?$)/i.test(f.path) && !/(node_modules|assets|images|css|js\/vendor)\//i.test(f.path));
+  })();
+  return factpediaTreeCache;
+}
 async function factpediaSearch(query: string): Promise<Source[]> {
+  const qs=tokens(query); const q=normalizeQuery(query);
   try {
     const res=await fetch(FACTPEDIA_URL,{headers:{Accept:'application/json'}});
-    if(!res.ok) return [];
-    const data=await res.json();
-    const rows: FactRecord[]=Array.isArray(data)?data:(data.articles??data.items??[]);
-    const q=normalizeQuery(query);
-    const qs=tokens(query);
-    return rows.map((r,i)=>{
-      const text=r.content??r.text??r.summary??'';
-      const hay=normalizeQuery(r.title+' '+text);
-      const hits=qs.filter(t=>hay.includes(t)).length;
-      return {r,i,score:hits/(qs.length||1)+(normalizeQuery(r.title).includes(q)?0.5:0)};
-    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,8).map(({r,i,score})=>({
-      id:'factpedia-'+i,title:r.title,url:r.url??'#',extract:(r.content??r.text??r.summary??'').slice(0,1200),
-      provider:'Factpedia' as const,language:r.language?.startsWith('mr')?'mr':'en',score:Math.min(score,1)
+    if(res.ok) {
+      const data=await res.json();
+      const rows: FactRecord[]=Array.isArray(data)?data:(data.articles??data.items??[]);
+      const indexed=rows.map((r,i)=>{const text=r.content??r.text??r.summary??'';const hay=normalizeQuery(r.title+' '+text);const hits=qs.filter(t=>hay.includes(t)).length;return {r,i,score:hits/(qs.length||1)+(normalizeQuery(r.title).includes(q)?0.5:0)};})
+        .filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,8)
+        .map(({r,i,score})=>({id:'factpedia-'+i,title:r.title,url:r.url??'#',extract:(r.content??r.text??r.summary??'').slice(0,1200),provider:'Factpedia' as const,language:(r.language?.startsWith('mr')?'mr':'en') as 'mr'|'en',score:Math.min(score,1)}));
+      if(indexed.length) return indexed;
+    }
+  } catch {}
+  try {
+    const files=await loadFactpediaTree();
+    const candidates=files.map((f:any)=>{const path=normalizeQuery(f.path.replace(/\.(html?|md|json)$/i,'').replace(/[\\/_-]+/g,' '));const hits=qs.filter(t=>path.includes(t)).length;return {file:f,score:hits/(qs.length||1)+(path.includes(q)?0.5:0)};})
+      .filter((x:any)=>x.score>0).sort((a:any,b:any)=>b.score-a.score).slice(0,7);
+    const found=await Promise.all(candidates.map(async ({file,score}:any)=>{
+      const raw='https://raw.githubusercontent.com/shravan-info/factpedia-mr/main/'+file.path.split('/').map(encodeURIComponent).join('/');
+      const response=await fetch(raw); if(!response.ok) return null;
+      const text=await response.text();
+      let title=file.path.split('/').pop().replace(/\.(html?|md|json)$/i,'').replace(/[-_]/g,' ');
+      let extract=text;
+      if(/\.html?$/i.test(file.path)) {
+        const doc=new DOMParser().parseFromString(text,'text/html');
+        title=doc.querySelector('h1')?.textContent?.trim()||doc.title||title;
+        extract=doc.querySelector('article')?.textContent||doc.querySelector('main')?.textContent||doc.body?.textContent||'';
+      } else if(/\.json$/i.test(file.path)) {
+        try { const data=JSON.parse(text); title=data.title||title; extract=data.content||data.text||data.summary||JSON.stringify(data); } catch {}
+      } else extract=text.replace(/^#+\s/gm,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1');
+      extract=String(extract).replace(/\s+/g,' ').trim().slice(0,1400);
+      if(!extract) return null;
+      return {id:'factpedia-'+file.sha,title,url:'https://github.com/shravan-info/factpedia-mr/blob/main/'+file.path,extract,provider:'Factpedia' as const,language:(/[\u0900-\u097F]/.test(title+' '+extract)?'mr':'en') as 'mr'|'en',score:Math.min(score,1)} as Source;
     }));
+    return found.filter((x):x is Source=>Boolean(x));
   } catch { return []; }
 }
 async function wikipediaSearch(query: string, lang: 'mr'|'en'): Promise<Source[]> {
