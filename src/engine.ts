@@ -3,8 +3,6 @@ export type Intent = 'definition' | 'howto' | 'comparison' | 'history' | 'person
 export type Source = { id: string; title: string; url: string; extract: string; provider: 'Factpedia' | 'Wikipedia'; language: 'mr' | 'en'; score: number };
 
 const mrChars = /[\u0900-\u097F]/;
-const mrWords = ['काय','कोण','कसे','कशी','कधी','कुठे','का','माहिती','इतिहास','कारण','फरक','तुलना','समजावून','सांग','व्याख्या','वैशिष्ट्ये','उदाहरण','भारत','महाराष्ट्र','विज्ञान','भूगोल','गणित','जीवन','प्रक्रिया','कार्य','उपयोग','शोध','निर्मिती','महत्त्व','स्पष्टीकरण','सारांश'];
-const enWords = ['what','who','how','when','where','why','explain','define','meaning','history','difference','compare','example','features','information','science','geography','math','process','function','uses','discover','invent','importance','summary','overview','list','causes','effects'];
 const stop = new Set(['the','a','an','is','are','was','were','of','to','in','on','for','and','or','with','what','how','का','आहे','आणि','हे','ही','तो','ती','ते','एक','च्या','मध्ये','बद्दल','काय']);
 
 export function detectLanguage(q: string): Language {
@@ -49,7 +47,6 @@ const seedExamples: Record<Intent, string[]> = {
   general: ['tell me about knowledge','भारताची माहिती','give information about computers'],
 };
 const vocab = Array.from(new Set(Object.values(seedExamples).flatMap(tokens))).slice(0, 180);
-const ix = new Map(vocab.map((w, i) => [w, i]));
 const rand = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return (x - Math.floor(x)) * 0.16 - 0.08; };
 const inputN = vocab.length, hiddenN = 32, outputN = labels.length;
 const w1 = Array.from({length: inputN * hiddenN}, (_, i) => rand(i + 1));
