@@ -15,8 +15,7 @@ npm run build
 
 ## Knowledge sources
 - Wikipedia: MediaWiki search API and page summary endpoints for Marathi and English.
-- Factpedia: local JSON index retrieval. Deploy a `factpedia-index.json` file at the app root, or configure `VITE_FACTPEDIA_INDEX_URL`. Accepted shape: an array of objects with `title`, `content` (or `text`), `url`, and optional `language` fields.
-- If the Factpedia index is not present, the interface reports that honestly rather than claiming it searched Factpedia.
+- Factpedia: first checks an optional local JSON index (`factpedia-index.json` or `VITE_FACTPEDIA_INDEX_URL`), then searches the public `shravan-info/factpedia-mr` GitHub repository tree and retrieves matching article files. The JSON index format is an array of objects with `title`, `content` (or `text`), `url`, and optional `language` fields.
 
 ## Intelligence architecture
 - Marathi, English and mixed-language detection.
