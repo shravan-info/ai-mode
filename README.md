@@ -25,6 +25,13 @@ npm run build
 - Hybrid retrieval, relevance ranking, deduplication, source snippets and citations.
 - GLE v1: intent-aware, bilingual, evidence-grounded response generation with sentence selection, deduplication, structured sections, and confidence diagnostics.\n- Safe fallback when source evidence is insufficient; no fabricated facts.
 
+## GLE v4 natural answer composition
+- Adds a deterministic bilingual natural-language realization layer that writes a fresh answer introduction and organizes relevant evidence into readable sections.
+- Removes raw frontmatter/metadata, table fragments, HTML residue and generic source disclaimers before answer composition.
+- Filters out sources whose article titles do not match the requested subject, reducing unrelated-article mixing (for example, two different talukas sharing the word “taluka”).
+- Deduplicates repeated passages and keeps source claims traceable; it does not invent translations or unsupported facts.
+- This is rule-based NLG, not a trained generative language model. Fully free-form paraphrasing and translation still require a capable language model.
+
 ## GLE v3 evidence checks
 - Follow-up questions can reuse the last few conversation questions to improve retrieval context.
 - Similar passages from different sources are counted as cross-source support signals.
