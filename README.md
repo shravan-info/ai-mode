@@ -25,5 +25,11 @@ npm run build
 - Hybrid retrieval, relevance ranking, deduplication, source snippets and citations.
 - GLE v1: intent-aware, bilingual, evidence-grounded response generation with sentence selection, deduplication, structured sections, and confidence diagnostics.\n- Safe fallback when source evidence is insufficient; no fabricated facts.
 
+## GLE v3 evidence checks
+- Follow-up questions can reuse the last few conversation questions to improve retrieval context.
+- Similar passages from different sources are counted as cross-source support signals.
+- Possible disagreement flags are heuristic review hints, not proof of factual contradiction.
+- The response text remains grounded in retrieved evidence; the engine does not claim human-level reasoning or open-ended LLM generation.
+
 ## Important limitation
 A 2,400-signal rule bank and a small intent classifier do not equal GPT-3. GPT-level open-ended generation requires a large trained language model. The architecture is ready for a generative model provider to be connected later.
