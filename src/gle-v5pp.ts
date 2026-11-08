@@ -93,7 +93,7 @@ function collectPassages(query: string, sources: Source[], language: Language): 
     .slice(0, 7);
 }
 
-function buildSections(query: string, passages: Passage[], language: Language): GLESection[] {
+function buildSections(passages: Passage[], language: Language): GLESection[] {
   if (!passages.length) return [];
   const mr = language === 'mr';
   const direct = passages[0];
@@ -136,7 +136,7 @@ export function generateGLEv5ppResponse(
   const passages = collectPassages(query, retrieval.sources, language);
   const usedSources = new Set(passages.map(item => item.source.id));
   const otherLanguageEvidence = retrieval.sources.some(source => source.language !== language);
-  const sections = buildSections(query, passages, language);
+  const sections = buildSections(passages, language);
   const answer = sections.length
     ? sections.map(section => section.heading + '\n' + section.paragraphs.join('\n\n')).join('\n\n')
     : insufficientMessage(language, otherLanguageEvidence);
