@@ -5,3 +5,7 @@
 .gle-diagnostics{font-size:10px;letter-spacing:.2px;color:#7c8796;margin:-6px 0 13px 25px}.answer-text p:first-child{font-weight:700;color:#28364a;margin-bottom:7px}.answer-text p{white-space:pre-wrap}.answer-text .answer-note{font-size:11px;color:#7e8793;border-top:1px solid #edf0f4;padding-top:11px;margin-top:13px;font-weight:400}.dark .gle-diagnostics{color:#aab2c0}.dark .answer-text p:first-child{color:#e8edf6}.dark .answer-text .answer-note{border-color:#343a46;color:#aab2c0}
 
 .answer-text .answer-section-title{font-weight:700;color:#26364c;margin:14px 0 6px}.dark .answer-text .answer-section-title{color:#e8edf6}
+
+
+.evidence-summary{margin:-5px 0 15px 25px;padding:9px 11px;border:1px solid #e6ebf2;border-radius:10px;background:#f8faff;color:#566579;font-size:11px;line-height:1.6}
+.dark .evidence-summary{border-color:#343d4b;background:#202733;color:#c0cad8}
