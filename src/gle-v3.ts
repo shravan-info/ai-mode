@@ -12,7 +12,7 @@ export type EvidenceInsight = {
 };
 export type GLEv3Response = GLEResponse & { evidence: EvidenceInsight };
 
-const FOLLOW_UP = /^(why|how|what about|and|also|explain more|tell me more|continue|its|it is|they|them|that|this|हे का|ते का|असे का|कसे|कसं|आणखी|अधिक माहिती|त्याबद्दल|याबद्दल|मग|आणि)\b?/i;
+const FOLLOW_UP = /^(why|how|what about|and|also|explain more|tell me more|continue|its|it is|they|them|that|this|हे का|ते का|असे का|कसे|कसं|आणखी|अधिक माहिती|त्याबद्दल|याबद्दल|मग|आणि)(?:\\b|\\s|$)/i;
 const NEGATIVE = /\b(not|no|never|neither|cannot|can't|isn't|wasn't|doesn't|didn't|without)\b|नाही|नसते|नव्हते|नव्हता|नसल्यामुळे/i;
 
 type Passage = { text: string; source: Source; terms: string[] };
