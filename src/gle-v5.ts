@@ -9,7 +9,6 @@ const STOP = new Set([
 ]);
 const SYNONYMS:Record<string,string[]> = {
   'ऋतू':['seasons','season','axial tilt','earth tilt','climate'],
-  'वैशिष्ट्ये':['features','characteristics','preamble','fundamental rights','directive principles','राज्यव्यवस्था','मूलभूत हक्क'],
   'पृथ्वी':['earth','planet','axis','orbit'],
   'निर्माण':['caused','cause','occur','formation'],
   'संविधान':['constitution','constitutional','राज्यघटना'],
