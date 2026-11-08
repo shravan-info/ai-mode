@@ -5,7 +5,7 @@ import type { RetrievalV5Result } from './retrieval-v5';
 type EvidenceSentence = {text:string;source:Source;score:number};
 const STOP = new Set([
   'what','where','when','who','why','how','tell','about','give','show','information','details','explain','describe','is','are','the','of','for','in','on','and','or','to','a','an','does','do','which','that','this','with',
-  'काय','कसे','कशी','कसा','कोण','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','होतात','होतो','एक','प्रमुख','वैशिष्ट्ये','समजावून','सांग','सोप्या','मराठीत',
+  'काय','कसे','कशी','कसा','कोण','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','होतात','होतो','एक','प्रमुख','वैशिष्ट्ये','कोणती','कोणते','समजावून','सांग','सोप्या','मराठीत',
 ]);
 const SYNONYMS:Record<string,string[]> = {
   'ऋतू':['seasons','season','axial tilt','earth tilt','climate'],
@@ -27,7 +27,7 @@ const SPLIT = /(?<=[.!?।॥])\s+|\n+/u;
 
 function termsFor(query:string):string[] {
   const base = tokens(query).filter(t=>!STOP.has(t));
-  const expanded = base.flatMap(t=>SYNONYMS[t]??[]);
+  const expanded = base.flatMap(t=>SYNONYMS[t]??Object.entries(SYNONYMS).find(([key])=>t.startsWith(key)&&key.length>2)?.[1]??[]);
   return [...new Set([...base,...expanded].map(normalizeQuery).filter(t=>t.length>1))];
 }
 function clean(input:string):string {
