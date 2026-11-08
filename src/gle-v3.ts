@@ -99,7 +99,7 @@ export function generateGLEv3Response(
   preferredLanguage?: Language,
 ): GLEv3Response {
   const contextual = buildContextualQuery(query, history);
-  const base = generateLanguageResponse(query, sources, preferredLanguage);
+  const base = generateLanguageResponse(contextual.query, sources, preferredLanguage);
   const evidence = inspectEvidence(contextual.query, sources, contextual.contextUsed, base.language);
   return { ...base, evidence };
 }
