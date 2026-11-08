@@ -13,30 +13,24 @@ npm run dev
 npm run build
 ```
 
-## Knowledge sources
-- Wikipedia: MediaWiki search API and page summary endpoints for Marathi and English.
-- Factpedia: first checks an optional local JSON index (`factpedia-index.json` or `VITE_FACTPEDIA_INDEX_URL`), then searches the public `shravan-info/factpedia-mr` GitHub repository tree and retrieves matching article files. The JSON index format is an array of objects with `title`, `content` (or `text`), `url`, and optional `language` fields.
+## Knowledge sources (GLE v5++)
+- **Marathi Wikipedia** and **English Wikipedia** are both queried for every question through their MediaWiki Action APIs. The engine searches article titles and text, then retrieves article extracts and language links/metadata from Wikipedia itself.
+- **Factpedia** is searched through the optional local JSON index (`factpedia-index.json` or `VITE_FACTPEDIA_INDEX_URL`), with a GitHub repository-tree fallback to retrieve matching article files from `shravan-info/factpedia-mr`.
+- No general web search engine is used by the GLE retrieval pipeline.
 
-## Intelligence architecture
-- Marathi, English and mixed-language detection.
-- Query normalization, tokenization, stop-word handling and bilingual query expansion.
-- A compact trainable MLP neural network for intent classification. This is a real neural classifier for routing, not a generative language model.
-- An extensible rule bank with 2,400 weighted bilingual lexical-combination signals.
-- Hybrid retrieval, relevance ranking, deduplication, source snippets and citations.
-- GLE v1: intent-aware, bilingual, evidence-grounded response generation with sentence selection, deduplication, structured sections, and confidence diagnostics.\n- Safe fallback when source evidence is insufficient; no fabricated facts.
+## GLE v5++ architecture
+- Bilingual query expansion for common Marathi-English topic terms.
+- Parallel retrieval from Marathi Wikipedia, English Wikipedia and Factpedia.
+- Full article extract retrieval rather than relying only on short search-result snippets.
+- Subject relevance scoring across article titles and individual sentences.
+- Language-aware evidence ranking, deduplication and source-linked passages.
+- Retrieval diagnostics show how many pages were found in each source.
+- Insufficient-evidence fallback when no relevant passages are found.
+- Follow-up question context is preserved by the existing GLE v3 contextual-query helper.
+- Existing 2,400 weighted bilingual rule signals and compact intent classifier remain available for routing and retrieval support.
 
-## GLE v4 natural answer composition
-- Adds a deterministic bilingual natural-language realization layer that writes a fresh answer introduction and organizes relevant evidence into readable sections.
-- Removes raw frontmatter/metadata, table fragments, HTML residue and generic source disclaimers before answer composition.
-- Filters out sources whose article titles do not match the requested subject, reducing unrelated-article mixing (for example, two different talukas sharing the word “taluka”).
-- Deduplicates repeated passages and keeps source claims traceable; it does not invent translations or unsupported facts.
-- This is rule-based NLG, not a trained generative language model. Fully free-form paraphrasing and translation still require a capable language model.
+## Generation limitations
+GLE v5++ is deterministic, evidence-grounded answer composition. It selects and organizes relevant source sentences and attaches source references. It is **not** a trained generative language model and does not freely translate English passages into Marathi or paraphrase arbitrary facts. When a matching passage is available only in the other language, the answer marks its source language rather than pretending it has translated it. True fluent open-ended generation/translation requires connecting a generative language model.
 
-## GLE v3 evidence checks
-- Follow-up questions can reuse the last few conversation questions to improve retrieval context.
-- Similar passages from different sources are counted as cross-source support signals.
-- Possible disagreement flags are heuristic review hints, not proof of factual contradiction.
-- The response text remains grounded in retrieved evidence; the engine does not claim human-level reasoning or open-ended LLM generation.
-
-## Important limitation
-A 2,400-signal rule bank and a small intent classifier do not equal GPT-3. GPT-level open-ended generation requires a large trained language model. The architecture is ready for a generative model provider to be connected later.
+## Build verification
+Run `npm run build` after installing dependencies. A successful GitHub commit or pull request does not itself prove that GitHub Pages has deployed the latest build.
