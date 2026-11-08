@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Plus, Search, Sparkles, Sun, X } from 'lucide-react';
-import { buildAnswer, searchKnowledge, type Source } from './engine';
+import { buildAnswer, RULE_BANK, searchKnowledge, type Source } from './engine';
 
 type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed' };
 const starters = [
@@ -70,7 +70,7 @@ export default function App() {
         <SearchBox query={query} setQuery={setQuery} submit={submit} busy={busy} compact/>
       </section>}
     </main>
-    <footer className="footer"><span>Factpedia AI Mode</span><span>Answers are generated from retrieved sources. Always verify important information.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
+    <footer className="footer"><span>Factpedia AI Mode</span><span>${RULE_BANK.length.toLocaleString()}+ logic signals · Neural intent classifier · Always verify important information.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
     {menu&&<div className="history-pop"><div className="history-head">Recent searches <button onClick={()=>setMenu(false)}><X size={15}/></button></div>{history.length?history.map((h,i)=><button key={i} onClick={()=>{void ask(h);setMenu(false)}}><Clock3 size={14}/>{h}</button>):<p>No recent searches</p>}</div>}
   </div>;
 }
