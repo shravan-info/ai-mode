@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Search, Sparkles, Sun, X } from 'lucide-react';
 import { RULE_BANK, searchKnowledge, type Source } from './engine';
-import { generateLanguageResponse, getGLEDiagnostics } from './gle';
+import { generateGLEv3Response, getGLEv3Diagnostics, buildContextualQuery } from './gle-v3';
 
-type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed'; diagnostics?:string; confidence?:number; mode?:'evidence-grounded'|'insufficient-evidence' };
+type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed'; diagnostics?:string; confidence?:number; mode?:'evidence-grounded'|'insufficient-evidence'; evidenceSummary?:string };
 const starters = [
   {mr:'भारताच्या संविधानाची प्रमुख वैशिष्ट्ये कोणती?',en:'What are the key features of the Indian Constitution?',icon:'⚖'},
   {mr:'प्रकाशसंश्लेषण कसे कार्य करते?',en:'How does photosynthesis work?',icon:'🌱'},
@@ -28,9 +28,11 @@ export default function App() {
     setTurns(prev=>[...prev,{id,question:q,answer:'',sources:[],loading:true,language:/[\u0900-\u097F]/.test(q)?'mr':'en'}]);
     setHistory(prev=>[q,...prev].slice(0,12));
     try {
-      const result=await searchKnowledge(q);
-      const generated=generateLanguageResponse(q,result.sources,language==='auto'?result.language:language);
-      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEDiagnostics(generated),confidence:generated.confidence,mode:generated.mode}:t));
+      const previousContext=turns.filter(t=>!t.loading).slice(-4).map(t=>({question:t.question,answer:t.answer}));
+      const contextual=buildContextualQuery(q,previousContext);
+      const result=await searchKnowledge(contextual.query);
+      const generated=generateGLEv3Response(q,result.sources,previousContext,language==='auto'?result.language:language);
+      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEv3Diagnostics(generated),evidenceSummary:generated.evidence.summary,confidence:generated.confidence,mode:generated.mode}:t));
     } catch {
       setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:'Search could not be completed. Check your connection and try again.',loading:false,mode:'insufficient-evidence'}:t));
     } finally { setBusy(false); }
@@ -62,6 +64,7 @@ export default function App() {
           {t.loading?<div className="thinking"><span/><span/><span/> Searching knowledge and composing an answer…</div>:<>
             <div className="answer-head"><span className="answer-icon"><Sparkles size={16}/></span><b>GLE Answer</b><span className="verified">{t.mode === "evidence-grounded" ? <><Check size={12}/> Evidence-linked</> : "Limited evidence"}</span></div>
             <div className="gle-diagnostics">{t.diagnostics}</div>
+            {t.evidenceSummary&&<div className="evidence-summary">{t.evidenceSummary}</div>}
             <div className="answer-text">{t.answer.split('\n').map((p,i)=>p&&<p key={i} className={/^(थोडक्यात उत्तर|महत्त्वाचे मुद्दे|कार्यपद्धती|ऐतिहासिक माहिती|तुलनेसाठी उपलब्ध माहिती|सारांश|स्रोतांवर आधारित माहिती|Quick answer|Key details|How it works|Historical context|Comparison information found|Summary|Source-based information)/.test(p)?'answer-section-title':p.includes('·')?'answer-note':undefined}>{p}</p>)}</div>
             <div className="sources-heading"><BookOpen size={16}/> Sources <span>{t.sources.length}</span></div>
             <div className="source-grid">{t.sources.map(s=><a className="source-card" href={s.url} target="_blank" rel="noreferrer" key={s.id}><div className="source-top"><span className={'source-favicon '+(s.provider==='Factpedia'?'fp':'wp')}>{s.provider==='Factpedia'?'F':'W'}</span><span>{s.provider}</span><span className="external">↗</span></div><b>{s.title}</b><p>{s.extract.slice(0,170)}{s.extract.length>170?'…':''}</p></a>)}</div>
@@ -72,7 +75,7 @@ export default function App() {
         <SearchBox query={query} setQuery={setQuery} submit={submit} busy={busy} compact/>
       </section>}
     </main>
-    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v1 · {RULE_BANK.length.toLocaleString()}+ logic signals · Evidence-grounded generation · Verify important facts.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
+    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v3 · {RULE_BANK.length.toLocaleString()}+ logic signals · Evidence-grounded generation · Verify important facts.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
     {menu&&<div className="history-pop"><div className="history-head">Recent searches <button onClick={()=>setMenu(false)}><X size={15}/></button></div>{history.length?history.map((h,i)=><button key={i} onClick={()=>{void ask(h);setMenu(false)}}><Clock3 size={14}/>{h}</button>):<p>No recent searches</p>}</div>}
   </div>;
 }
