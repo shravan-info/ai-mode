@@ -62,7 +62,7 @@ export default function App() {
           {t.loading?<div className="thinking"><span/><span/><span/> Searching knowledge and composing an answer…</div>:<>
             <div className="answer-head"><span className="answer-icon"><Sparkles size={16}/></span><b>GLE Answer</b><span className="verified">{t.mode === "evidence-grounded" ? <><Check size={12}/> Evidence-linked</> : "Limited evidence"}</span></div>
             <div className="gle-diagnostics">{t.diagnostics}</div>
-            <div className="answer-text">{t.answer.split('\n').map((p,i)=>p&&<p key={i} className={p.includes('·')?'answer-note':undefined}>{p}</p>)}</div>
+            <div className="answer-text">{t.answer.split('\n').map((p,i)=>p&&<p key={i} className={/^(थोडक्यात उत्तर|महत्त्वाचे मुद्दे|कार्यपद्धती|ऐतिहासिक माहिती|तुलनेसाठी उपलब्ध माहिती|सारांश|स्रोतांवर आधारित माहिती|Quick answer|Key details|How it works|Historical context|Comparison information found|Summary|Source-based information)/.test(p)?'answer-section-title':p.includes('·')?'answer-note':undefined}>{p}</p>)}</div>
             <div className="sources-heading"><BookOpen size={16}/> Sources <span>{t.sources.length}</span></div>
             <div className="source-grid">{t.sources.map(s=><a className="source-card" href={s.url} target="_blank" rel="noreferrer" key={s.id}><div className="source-top"><span className={'source-favicon '+(s.provider==='Factpedia'?'fp':'wp')}>{s.provider==='Factpedia'?'F':'W'}</span><span>{s.provider}</span><span className="external">↗</span></div><b>{s.title}</b><p>{s.extract.slice(0,170)}{s.extract.length>170?'…':''}</p></a>)}</div>
             {!t.sources.length&&<p className="empty-source">No matching source was found. The Factpedia index may not be connected yet.</p>}
