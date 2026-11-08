@@ -28,7 +28,7 @@ export default function App() {
     setHistory(prev=>[q,...prev].slice(0,12));
     try {
       const result=await searchKnowledge(q);
-      const answer=buildAnswer(q,result.sources,language==='auto'?result.language:language);
+      const answer=buildAnswer(result.sources,language==='auto'?result.language:language);
       setTurns(prev=>prev.map(t=>t.id===id?{...t,answer,sources:result.sources,loading:false,language:result.language}:t));
     } catch {
       setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:'Search could not be completed. Check your connection and try again.',loading:false}:t));
