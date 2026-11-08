@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { ArrowUp, Atom, BookOpen, Check, ChevronDown, Clock3, Globe2, Menu, Mic, Moon, Plus, Search, Sparkles, Sun, X } from 'lucide-react';
+import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Plus, Search, Sparkles, Sun, X } from 'lucide-react';
 import { buildAnswer, searchKnowledge, type Source } from './engine';
 
 type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed' };
@@ -19,7 +19,6 @@ export default function App() {
   const [menu,setMenu]=useState(false);
   const [history,setHistory]=useState<string[]>([]);
   const isHome=turns.length===0;
-  const title=useMemo(()=>isHome?'Ask anything':'AI Mode', [isHome]);
 
   async function ask(value=query) {
     const q=value.trim(); if(!q||busy)return;
