@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Plus, Search, Sparkles, Sun, X } from 'lucide-react';
 import { buildAnswer, searchKnowledge, type Source } from './engine';
 
