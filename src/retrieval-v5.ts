@@ -12,7 +12,7 @@ export type RetrievalV5Result = {
 
 const STOP = new Set([
   'what','where','when','who','why','how','tell','about','give','show','information','details','explain','describe','is','are','the','of','for','in','on','and','or','to','a','an','does','do','was','were','will','would','can','could','should','which','that','this','with','from',
-  'काय','कसे','कशी','कसा','कोण','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','कसे','होतात','होतो','होते','एक','प्रमुख','वैशिष्ट्ये','समजावून','सांग',
+  'काय','कसे','कशी','कसा','कोण','कोणती','कोणते','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','कसे','होतात','होतो','होते','एक','प्रमुख','वैशिष्ट्ये','समजावून','सांग',
 ]);
 
 const ALIASES: Record<string, string[]> = {
@@ -44,7 +44,7 @@ function meaningfulTerms(query: string): string[] {
 
 function queryVariants(query: string): string[] {
   const terms = meaningfulTerms(query);
-  const expanded = terms.flatMap(term => ALIASES[term] ?? []);
+  const expanded = terms.flatMap(term => ALIASES[term] ?? Object.entries(ALIASES).find(([key]) => term.startsWith(key) && key.length > 2)?.[1] ?? []);
   const variants = [query.trim()];
   if (expanded.length) variants.push([...terms, ...expanded].join(' '));
   const direct = terms.flatMap(term => ALIASES[term] ?? []).filter(x => /^[a-z][a-z -]+$/i.test(x));
