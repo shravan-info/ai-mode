@@ -1,7 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Search, Sparkles, Sun, X } from 'lucide-react';
 import { RULE_BANK, searchKnowledge, type Source } from './engine';
-import { generateGLEv3Response, getGLEv3Diagnostics, buildContextualQuery } from './gle-v3';
+import { buildContextualQuery } from './gle-v3';
+import { generateGLEv4Response, getGLEv4Diagnostics } from './gle-v4';
 
 type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed'; diagnostics?:string; confidence?:number; mode?:'evidence-grounded'|'insufficient-evidence'; evidenceSummary?:string };
 const starters = [
@@ -31,8 +32,8 @@ export default function App() {
       const previousContext=turns.filter(t=>!t.loading).slice(-4).map(t=>({question:t.question,answer:t.answer}));
       const contextual=buildContextualQuery(q,previousContext);
       const result=await searchKnowledge(contextual.query);
-      const generated=generateGLEv3Response(q,result.sources,previousContext,language==='auto'?result.language:language);
-      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEv3Diagnostics(generated),evidenceSummary:generated.evidence.summary,confidence:generated.confidence,mode:generated.mode}:t));
+      const generated=generateGLEv4Response(q,result.sources,language==='auto'?result.language:language);
+      setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:generated.answer,sources:result.sources,loading:false,language:generated.language,diagnostics:getGLEv4Diagnostics(generated),confidence:generated.confidence,mode:generated.mode}:t));
     } catch {
       setTurns(prev=>prev.map(t=>t.id===id?{...t,answer:'Search could not be completed. Check your connection and try again.',loading:false,mode:'insufficient-evidence'}:t));
     } finally { setBusy(false); }
@@ -75,7 +76,7 @@ export default function App() {
         <SearchBox query={query} setQuery={setQuery} submit={submit} busy={busy} compact/>
       </section>}
     </main>
-    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v3 · {RULE_BANK.length.toLocaleString()}+ logic signals · Evidence-grounded generation · Verify important facts.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
+    <footer className="footer"><span>Factpedia AI Mode</span><span>GLE v4 · {RULE_BANK.length.toLocaleString()}+ logic signals · Evidence-grounded generation · Verify important facts.</span><button onClick={()=>setMenu(!menu)}><Clock3 size={14}/> Recent</button></footer>
     {menu&&<div className="history-pop"><div className="history-head">Recent searches <button onClick={()=>setMenu(false)}><X size={15}/></button></div>{history.length?history.map((h,i)=><button key={i} onClick={()=>{void ask(h);setMenu(false)}}><Clock3 size={14}/>{h}</button>):<p>No recent searches</p>}</div>}
   </div>;
 }
