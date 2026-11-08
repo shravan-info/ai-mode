@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Plus, Search, Sparkles, Sun, X } from 'lucide-react';
+import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Search, Sparkles, Sun, X } from 'lucide-react';
 import { buildAnswer, RULE_BANK, searchKnowledge, type Source } from './engine';
 
 type Turn = { id:number; question:string; answer:string; sources:Source[]; loading?:boolean; language:'mr'|'en'|'mixed' };
@@ -77,6 +77,6 @@ export default function App() {
 function SearchBox({query,setQuery,submit,busy,compact=false}:{query:string;setQuery:(v:string)=>void;submit:(e:FormEvent)=>void;busy:boolean;compact?:boolean}) {
   return <form className={'search-box '+(compact?'compact':'')} onSubmit={submit}>
     <textarea value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();e.currentTarget.form?.requestSubmit();}}} placeholder="Ask anything… / काहीही विचारा" rows={compact?1:2}/>
-    <div className="search-tools"><div><button type="button" className="tool-btn" title="Add context"><Plus size={17}/></button><button type="button" className="tool-btn web-toggle"><Globe2 size={15}/> Web & knowledge</button></div><div><button type="button" className="tool-btn" title="Voice input (coming soon)"><Mic size={17}/></button><button className="send-btn" type="submit" disabled={!query.trim()||busy} aria-label="Search"><ArrowUp size={19}/></button></div></div>
+    <div className="search-tools"><div><span className="tool-btn web-toggle"><Globe2 size={15}/> Web & knowledge</span></div><div><span className="tool-btn" title="Voice input coming soon"><Mic size={17}/></span><button className="send-btn" type="submit" disabled={!query.trim()||busy} aria-label="Search"><ArrowUp size={19}/></button></div></div>
   </form>;
 }
