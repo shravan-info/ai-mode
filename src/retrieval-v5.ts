@@ -170,7 +170,7 @@ async function factpediaSearch(query:string):Promise<Source[]> {
     return {file,title,score:scoreFact(terms,title,'')};
   }).filter((x:any)=>x.score>0).sort((a:any,b:any)=>b.score-a.score).slice(0,10);
 
-  const records = await Promise.all(ranked.map(async ({file,score}:any) => {
+  const records = await Promise.all(ranked.map(async ({file}:any) => {
     const rawUrl = 'https://raw.githubusercontent.com/shravan-info/factpedia-mr/main/' + String(file.path).split('/').map(encodeURIComponent).join('/');
     const response = await fetch(rawUrl);
     if (!response.ok) return null;
