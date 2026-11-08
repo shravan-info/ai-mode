@@ -5,10 +5,11 @@ import type { RetrievalV5Result } from './retrieval-v5';
 type EvidenceSentence = {text:string;source:Source;score:number};
 const STOP = new Set([
   'what','where','when','who','why','how','tell','about','give','show','information','details','explain','describe','is','are','the','of','for','in','on','and','or','to','a','an','does','do','which','that','this','with',
-  'काय','कसे','कशी','कसा','कोण','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','होतात','होतो','एक','प्रमुख','वैशिष्ट्ये','कोणती','कोणते','समजावून','सांग','सोप्या','मराठीत',
+  'काय','कसे','कशी','कसा','कोण','कुठे','कधी','का','माहिती','सांगा','द्या','बद्दल','विषयी','स्पष्ट','करा','आहे','होते','असते','याबद्दल','थोडक्यात','म्हणजे','आणि','यांची','यांचे','याचा','याची','यात','होतात','होतो','एक','प्रमुख','कोणती','कोणते','समजावून','सांग','सोप्या','मराठीत',
 ]);
 const SYNONYMS:Record<string,string[]> = {
   'ऋतू':['seasons','season','axial tilt','earth tilt','climate'],
+  'वैशिष्ट्ये':['features','characteristics','preamble','fundamental rights','directive principles','राज्यव्यवस्था','मूलभूत हक्क'],
   'पृथ्वी':['earth','planet','axis','orbit'],
   'निर्माण':['caused','cause','occur','formation'],
   'संविधान':['constitution','constitutional','राज्यघटना'],
@@ -39,8 +40,8 @@ function clean(input:string):string {
     .replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\s+/g,' ').trim();
 }
 function overlap(queryTerms:string[], text:string):number {
-  const normalized = normalizeQuery(text);
-  const hits = queryTerms.filter(term=>normalized.includes(term));
+  const normalized = ' ' + normalizeQuery(text).replace(/[^\\p{L}\\p{N}]+/gu,' ') + ' ';
+  const hits = queryTerms.filter(term=>normalized.includes(' ' + normalizeQuery(term) + ' '));
   return queryTerms.length ? hits.length/queryTerms.length : 0;
 }
 function titleScore(queryTerms:string[],title:string):number {
