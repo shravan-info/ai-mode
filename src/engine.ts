@@ -145,7 +145,7 @@ export function rankSources(query: string, sources: Source[]): Source[] {
     return {...s,score:Math.min(1,coverage*0.58+titleHit+provider+language+length+intentBoost)};
   }).sort((a,b)=>b.score-a.score);
 }
-export function buildAnswer(query: string, sources: Source[], language: Language): string {
+export function buildAnswer(sources: Source[], language: Language): string {
   if(!sources.length) return language==='mr'
     ? 'या प्रश्नासाठी विश्वासार्ह स्रोतांमधून पुरेशी माहिती मिळाली नाही. प्रश्न थोडा वेगळ्या शब्दांत विचारा किंवा विषय अधिक स्पष्ट करा.'
     : 'I could not find enough reliable source material for this question. Try rephrasing it or adding a little more context.';
@@ -188,7 +188,7 @@ async function factpediaSearch(query: string): Promise<Source[]> {
       const raw='https://raw.githubusercontent.com/shravan-info/factpedia-mr/main/'+file.path.split('/').map(encodeURIComponent).join('/');
       const response=await fetch(raw); if(!response.ok) return null;
       const text=await response.text();
-      let title=file.path.split('/').pop().replace(/\.(html?|md|json)$/i,'').replace(/[-_]/g,' ');
+      let title=(file.path.split('/').pop() ?? file.path).replace(/\.(html?|md|json)$/i,'').replace(/[-_]/g,' ');
       let extract=text;
       if(/\.html?$/i.test(file.path)) {
         const doc=new DOMParser().parseFromString(text,'text/html');
