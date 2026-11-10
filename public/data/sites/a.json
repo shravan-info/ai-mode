@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Academic Earth",
+    "url": "https://academicearth.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Lectures"
+    ],
+    "description": "Free online courses and university lectures."
+  },
+  {
+    "name": "Anki",
+    "url": "https://apps.ankiweb.net/",
+    "category": "Study tools",
+    "subjects": [
+      "Flashcards",
+      "Revision"
+    ],
+    "description": "Flashcard software for spaced-repetition learning."
+  },
+  {
+    "name": "arXiv",
+    "url": "https://arxiv.org/",
+    "category": "Research",
+    "subjects": [
+      "Physics",
+      "Mathematics",
+      "Computer Science"
+    ],
+    "description": "Open research papers in science, mathematics and computing."
+  }
+]

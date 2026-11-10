@@ -1,0 +1,12 @@
+[
+  {
+    "name": "JSTOR",
+    "url": "https://www.jstor.org/",
+    "category": "Research",
+    "subjects": [
+      "Humanities",
+      "Social Science"
+    ],
+    "description": "Digital library of academic journals and books."
+  }
+]

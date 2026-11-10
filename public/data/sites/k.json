@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Khan Academy",
+    "url": "https://www.khanacademy.org/",
+    "category": "School learning",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computing"
+    ],
+    "description": "Free lessons and practice in school subjects and more."
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "name": "GeeksforGeeks",
+    "url": "https://www.geeksforgeeks.org/",
+    "category": "Coding",
+    "subjects": [
+      "Computer Science",
+      "Programming"
+    ],
+    "description": "Computer science tutorials and coding problems."
+  },
+  {
+    "name": "Google Scholar",
+    "url": "https://scholar.google.com/",
+    "category": "Research",
+    "subjects": [
+      "Academic papers"
+    ],
+    "description": "Search scholarly literature across disciplines."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "OpenLearn",
+    "url": "https://www.open.edu/openlearn/",
+    "category": "Courses",
+    "subjects": [
+      "Free courses"
+    ],
+    "description": "Free courses and learning resources from The Open University."
+  },
+  {
+    "name": "OpenStax",
+    "url": "https://openstax.org/",
+    "category": "Textbooks",
+    "subjects": [
+      "Physics",
+      "Biology",
+      "Maths"
+    ],
+    "description": "Free peer-reviewed textbooks."
+  }
+]

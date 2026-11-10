@@ -1,0 +1,34 @@
+[
+  {
+    "name": "CK-12",
+    "url": "https://www.ck12.org/",
+    "category": "School learning",
+    "subjects": [
+      "STEM",
+      "Maths",
+      "Science"
+    ],
+    "description": "Free digital textbooks and interactive STEM resources."
+  },
+  {
+    "name": "Codecademy",
+    "url": "https://www.codecademy.com/",
+    "category": "Coding",
+    "subjects": [
+      "Programming",
+      "Python",
+      "Web development"
+    ],
+    "description": "Interactive programming courses and coding practice."
+  },
+  {
+    "name": "Coursera",
+    "url": "https://www.coursera.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Data Science"
+    ],
+    "description": "Online courses and professional certificates."
+  }
+]

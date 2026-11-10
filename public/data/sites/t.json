@@ -1,0 +1,22 @@
+[
+  {
+    "name": "TED-Ed",
+    "url": "https://ed.ted.com/",
+    "category": "Videos",
+    "subjects": [
+      "Science",
+      "History"
+    ],
+    "description": "Animated educational lessons and classroom resources."
+  },
+  {
+    "name": "Tinkercad",
+    "url": "https://www.tinkercad.com/",
+    "category": "STEM tools",
+    "subjects": [
+      "3D Design",
+      "Electronics"
+    ],
+    "description": "Browser-based tools for 3D design and electronics."
+  }
+]

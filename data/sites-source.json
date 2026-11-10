@@ -1,0 +1,485 @@
+[
+  {
+    "name": "Academic Earth",
+    "url": "https://academicearth.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Lectures"
+    ],
+    "description": "Free online courses and university lectures."
+  },
+  {
+    "name": "Anki",
+    "url": "https://apps.ankiweb.net/",
+    "category": "Study tools",
+    "subjects": [
+      "Flashcards",
+      "Revision"
+    ],
+    "description": "Flashcard software for spaced-repetition learning."
+  },
+  {
+    "name": "arXiv",
+    "url": "https://arxiv.org/",
+    "category": "Research",
+    "subjects": [
+      "Physics",
+      "Mathematics",
+      "Computer Science"
+    ],
+    "description": "Open research papers in science, mathematics and computing."
+  },
+  {
+    "name": "BBC Bitesize",
+    "url": "https://www.bbc.co.uk/bitesize",
+    "category": "School learning",
+    "subjects": [
+      "Science",
+      "Maths",
+      "English"
+    ],
+    "description": "School-level revision guides, lessons and practice."
+  },
+  {
+    "name": "Brilliant",
+    "url": "https://brilliant.org/",
+    "category": "Courses",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computer Science"
+    ],
+    "description": "Interactive lessons in mathematics, science and computer science."
+  },
+  {
+    "name": "Britannica",
+    "url": "https://www.britannica.com/",
+    "category": "Reference",
+    "subjects": [
+      "History",
+      "Science"
+    ],
+    "description": "Encyclopedia articles and reference information."
+  },
+  {
+    "name": "CK-12",
+    "url": "https://www.ck12.org/",
+    "category": "School learning",
+    "subjects": [
+      "STEM",
+      "Maths",
+      "Science"
+    ],
+    "description": "Free digital textbooks and interactive STEM resources."
+  },
+  {
+    "name": "Codecademy",
+    "url": "https://www.codecademy.com/",
+    "category": "Coding",
+    "subjects": [
+      "Programming",
+      "Python",
+      "Web development"
+    ],
+    "description": "Interactive programming courses and coding practice."
+  },
+  {
+    "name": "Coursera",
+    "url": "https://www.coursera.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Data Science"
+    ],
+    "description": "Online courses and professional certificates."
+  },
+  {
+    "name": "Desmos",
+    "url": "https://www.desmos.com/",
+    "category": "Maths",
+    "subjects": [
+      "Graphing",
+      "Algebra",
+      "Geometry"
+    ],
+    "description": "Free graphing calculator and classroom mathematics activities."
+  },
+  {
+    "name": "Duolingo",
+    "url": "https://www.duolingo.com/",
+    "category": "Languages",
+    "subjects": [
+      "Language learning"
+    ],
+    "description": "Language-learning lessons and practice."
+  },
+  {
+    "name": "edX",
+    "url": "https://www.edx.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Computer Science"
+    ],
+    "description": "Online courses and programmes from universities."
+  },
+  {
+    "name": "FreeCodeCamp",
+    "url": "https://www.freecodecamp.org/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Python"
+    ],
+    "description": "Free coding lessons, projects and certifications."
+  },
+  {
+    "name": "GeeksforGeeks",
+    "url": "https://www.geeksforgeeks.org/",
+    "category": "Coding",
+    "subjects": [
+      "Computer Science",
+      "Programming"
+    ],
+    "description": "Computer science tutorials and coding problems."
+  },
+  {
+    "name": "Google Scholar",
+    "url": "https://scholar.google.com/",
+    "category": "Research",
+    "subjects": [
+      "Academic papers"
+    ],
+    "description": "Search scholarly literature across disciplines."
+  },
+  {
+    "name": "Harvard Online",
+    "url": "https://pll.harvard.edu/",
+    "category": "Courses",
+    "subjects": [
+      "University"
+    ],
+    "description": "Online courses and learning programmes from Harvard."
+  },
+  {
+    "name": "IndiaBIX",
+    "url": "https://www.indiabix.com/",
+    "category": "Practice",
+    "subjects": [
+      "Aptitude",
+      "Reasoning"
+    ],
+    "description": "Practice questions for aptitude and reasoning."
+  },
+  {
+    "name": "IIT Bombay",
+    "url": "https://www.iitb.ac.in/",
+    "category": "University",
+    "subjects": [
+      "Engineering",
+      "India"
+    ],
+    "description": "Official website of the Indian Institute of Technology Bombay."
+  },
+  {
+    "name": "JSTOR",
+    "url": "https://www.jstor.org/",
+    "category": "Research",
+    "subjects": [
+      "Humanities",
+      "Social Science"
+    ],
+    "description": "Digital library of academic journals and books."
+  },
+  {
+    "name": "Khan Academy",
+    "url": "https://www.khanacademy.org/",
+    "category": "School learning",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computing"
+    ],
+    "description": "Free lessons and practice in school subjects and more."
+  },
+  {
+    "name": "Maharashtra State Board",
+    "url": "https://www.mahahsscboard.in/",
+    "category": "Government education",
+    "subjects": [
+      "SSC",
+      "HSC",
+      "Maharashtra"
+    ],
+    "description": "Official Maharashtra State Board of Secondary and Higher Secondary Education."
+  },
+  {
+    "name": "Maharashtra SCERT",
+    "url": "https://www.maa.ac.in/",
+    "category": "Government education",
+    "subjects": [
+      "Textbooks",
+      "Curriculum"
+    ],
+    "description": "State educational research, training and academic resources."
+  },
+  {
+    "name": "Math is Fun",
+    "url": "https://www.mathsisfun.com/",
+    "category": "Maths",
+    "subjects": [
+      "Algebra",
+      "Geometry"
+    ],
+    "description": "Accessible explanations and interactive mathematics."
+  },
+  {
+    "name": "MDN Web Docs",
+    "url": "https://developer.mozilla.org/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "description": "Documentation and tutorials for web technologies."
+  },
+  {
+    "name": "MIT OpenCourseWare",
+    "url": "https://ocw.mit.edu/",
+    "category": "Courses",
+    "subjects": [
+      "Engineering",
+      "Science",
+      "Mathematics"
+    ],
+    "description": "Free course materials from MIT."
+  },
+  {
+    "name": "National Digital Library of India",
+    "url": "https://ndl.iitkgp.ac.in/",
+    "category": "Library",
+    "subjects": [
+      "India",
+      "Books",
+      "Research"
+    ],
+    "description": "Digital learning resources and educational materials."
+  },
+  {
+    "name": "NPTEL",
+    "url": "https://nptel.ac.in/",
+    "category": "Courses",
+    "subjects": [
+      "Engineering",
+      "Science",
+      "India"
+    ],
+    "description": "Online courses from Indian institutes."
+  },
+  {
+    "name": "OpenLearn",
+    "url": "https://www.open.edu/openlearn/",
+    "category": "Courses",
+    "subjects": [
+      "Free courses"
+    ],
+    "description": "Free courses and learning resources from The Open University."
+  },
+  {
+    "name": "OpenStax",
+    "url": "https://openstax.org/",
+    "category": "Textbooks",
+    "subjects": [
+      "Physics",
+      "Biology",
+      "Maths"
+    ],
+    "description": "Free peer-reviewed textbooks."
+  },
+  {
+    "name": "PhET",
+    "url": "https://phet.colorado.edu/",
+    "category": "Science",
+    "subjects": [
+      "Physics",
+      "Chemistry",
+      "Maths"
+    ],
+    "description": "Interactive science and mathematics simulations."
+  },
+  {
+    "name": "PubMed",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/",
+    "category": "Research",
+    "subjects": [
+      "Medicine",
+      "Biology"
+    ],
+    "description": "Search biomedical and life-sciences literature."
+  },
+  {
+    "name": "Python.org",
+    "url": "https://www.python.org/",
+    "category": "Coding",
+    "subjects": [
+      "Python",
+      "Programming"
+    ],
+    "description": "Official Python programming language website."
+  },
+  {
+    "name": "Quizlet",
+    "url": "https://quizlet.com/",
+    "category": "Study tools",
+    "subjects": [
+      "Flashcards",
+      "Study"
+    ],
+    "description": "Study sets, flashcards and learning activities."
+  },
+  {
+    "name": "Science Buddies",
+    "url": "https://www.sciencebuddies.org/",
+    "category": "Science",
+    "subjects": [
+      "Experiments",
+      "STEM"
+    ],
+    "description": "Science project ideas and experiments."
+  },
+  {
+    "name": "SWAYAM",
+    "url": "https://swayam.gov.in/",
+    "category": "Government education",
+    "subjects": [
+      "India",
+      "Online courses"
+    ],
+    "description": "India's national online learning platform."
+  },
+  {
+    "name": "TED-Ed",
+    "url": "https://ed.ted.com/",
+    "category": "Videos",
+    "subjects": [
+      "Science",
+      "History"
+    ],
+    "description": "Animated educational lessons and classroom resources."
+  },
+  {
+    "name": "Tinkercad",
+    "url": "https://www.tinkercad.com/",
+    "category": "STEM tools",
+    "subjects": [
+      "3D Design",
+      "Electronics"
+    ],
+    "description": "Browser-based tools for 3D design and electronics."
+  },
+  {
+    "name": "UNESCO",
+    "url": "https://www.unesco.org/",
+    "category": "Reference",
+    "subjects": [
+      "Education",
+      "Culture",
+      "Science"
+    ],
+    "description": "Global information about education, science and culture."
+  },
+  {
+    "name": "Unacademy",
+    "url": "https://unacademy.com/",
+    "category": "Exam preparation",
+    "subjects": [
+      "India",
+      "Competitive exams"
+    ],
+    "description": "Online learning courses for examinations and school subjects."
+  },
+  {
+    "name": "University of Oxford",
+    "url": "https://www.ox.ac.uk/",
+    "category": "University",
+    "subjects": [
+      "Research",
+      "Courses"
+    ],
+    "description": "Official website of the University of Oxford."
+  },
+  {
+    "name": "Vedantu",
+    "url": "https://www.vedantu.com/",
+    "category": "School learning",
+    "subjects": [
+      "India",
+      "Maths",
+      "Science"
+    ],
+    "description": "Online learning and school subject resources."
+  },
+  {
+    "name": "W3Schools",
+    "url": "https://www.w3schools.com/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "description": "Web development tutorials and coding examples."
+  },
+  {
+    "name": "Wikibooks",
+    "url": "https://www.wikibooks.org/",
+    "category": "Library",
+    "subjects": [
+      "Textbooks"
+    ],
+    "description": "Free textbooks and educational books."
+  },
+  {
+    "name": "Wikiversity",
+    "url": "https://www.wikiversity.org/",
+    "category": "Courses",
+    "subjects": [
+      "Learning projects"
+    ],
+    "description": "Collaborative learning resources and projects."
+  },
+  {
+    "name": "Wikipedia",
+    "url": "https://www.wikipedia.org/",
+    "category": "Reference",
+    "subjects": [
+      "General knowledge"
+    ],
+    "description": "Free online encyclopedia."
+  },
+  {
+    "name": "Wolfram Alpha",
+    "url": "https://www.wolframalpha.com/",
+    "category": "Maths",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computation"
+    ],
+    "description": "Computational knowledge engine for mathematics and science."
+  },
+  {
+    "name": "World Bank Open Data",
+    "url": "https://data.worldbank.org/",
+    "category": "Research",
+    "subjects": [
+      "Economics",
+      "Statistics"
+    ],
+    "description": "Open development data and statistics."
+  }
+]

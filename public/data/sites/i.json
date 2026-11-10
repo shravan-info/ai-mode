@@ -1,0 +1,22 @@
+[
+  {
+    "name": "IIT Bombay",
+    "url": "https://www.iitb.ac.in/",
+    "category": "University",
+    "subjects": [
+      "Engineering",
+      "India"
+    ],
+    "description": "Official website of the Indian Institute of Technology Bombay."
+  },
+  {
+    "name": "IndiaBIX",
+    "url": "https://www.indiabix.com/",
+    "category": "Practice",
+    "subjects": [
+      "Aptitude",
+      "Reasoning"
+    ],
+    "description": "Practice questions for aptitude and reasoning."
+  }
+]

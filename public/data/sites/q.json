@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Quizlet",
+    "url": "https://quizlet.com/",
+    "category": "Study tools",
+    "subjects": [
+      "Flashcards",
+      "Study"
+    ],
+    "description": "Study sets, flashcards and learning activities."
+  }
+]

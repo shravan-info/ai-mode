@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Desmos",
+    "url": "https://www.desmos.com/",
+    "category": "Maths",
+    "subjects": [
+      "Graphing",
+      "Algebra",
+      "Geometry"
+    ],
+    "description": "Free graphing calculator and classroom mathematics activities."
+  },
+  {
+    "name": "Duolingo",
+    "url": "https://www.duolingo.com/",
+    "category": "Languages",
+    "subjects": [
+      "Language learning"
+    ],
+    "description": "Language-learning lessons and practice."
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "National Digital Library of India",
+    "url": "https://ndl.iitkgp.ac.in/",
+    "category": "Library",
+    "subjects": [
+      "India",
+      "Books",
+      "Research"
+    ],
+    "description": "Digital learning resources and educational materials."
+  },
+  {
+    "name": "NPTEL",
+    "url": "https://nptel.ac.in/",
+    "category": "Courses",
+    "subjects": [
+      "Engineering",
+      "Science",
+      "India"
+    ],
+    "description": "Online courses from Indian institutes."
+  }
+]

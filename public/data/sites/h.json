@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Harvard Online",
+    "url": "https://pll.harvard.edu/",
+    "category": "Courses",
+    "subjects": [
+      "University"
+    ],
+    "description": "Online courses and learning programmes from Harvard."
+  }
+]

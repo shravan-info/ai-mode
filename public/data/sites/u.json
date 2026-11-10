@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Unacademy",
+    "url": "https://unacademy.com/",
+    "category": "Exam preparation",
+    "subjects": [
+      "India",
+      "Competitive exams"
+    ],
+    "description": "Online learning courses for examinations and school subjects."
+  },
+  {
+    "name": "UNESCO",
+    "url": "https://www.unesco.org/",
+    "category": "Reference",
+    "subjects": [
+      "Education",
+      "Culture",
+      "Science"
+    ],
+    "description": "Global information about education, science and culture."
+  },
+  {
+    "name": "University of Oxford",
+    "url": "https://www.ox.ac.uk/",
+    "category": "University",
+    "subjects": [
+      "Research",
+      "Courses"
+    ],
+    "description": "Official website of the University of Oxford."
+  }
+]

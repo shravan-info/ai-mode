@@ -1,0 +1,33 @@
+[
+  {
+    "name": "PhET",
+    "url": "https://phet.colorado.edu/",
+    "category": "Science",
+    "subjects": [
+      "Physics",
+      "Chemistry",
+      "Maths"
+    ],
+    "description": "Interactive science and mathematics simulations."
+  },
+  {
+    "name": "PubMed",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/",
+    "category": "Research",
+    "subjects": [
+      "Medicine",
+      "Biology"
+    ],
+    "description": "Search biomedical and life-sciences literature."
+  },
+  {
+    "name": "Python.org",
+    "url": "https://www.python.org/",
+    "category": "Coding",
+    "subjects": [
+      "Python",
+      "Programming"
+    ],
+    "description": "Official Python programming language website."
+  }
+]

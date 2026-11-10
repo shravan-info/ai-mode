@@ -1,0 +1,34 @@
+[
+  {
+    "name": "BBC Bitesize",
+    "url": "https://www.bbc.co.uk/bitesize",
+    "category": "School learning",
+    "subjects": [
+      "Science",
+      "Maths",
+      "English"
+    ],
+    "description": "School-level revision guides, lessons and practice."
+  },
+  {
+    "name": "Brilliant",
+    "url": "https://brilliant.org/",
+    "category": "Courses",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computer Science"
+    ],
+    "description": "Interactive lessons in mathematics, science and computer science."
+  },
+  {
+    "name": "Britannica",
+    "url": "https://www.britannica.com/",
+    "category": "Reference",
+    "subjects": [
+      "History",
+      "Science"
+    ],
+    "description": "Encyclopedia articles and reference information."
+  }
+]

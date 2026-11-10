@@ -1,0 +1,55 @@
+[
+  {
+    "name": "Maharashtra SCERT",
+    "url": "https://www.maa.ac.in/",
+    "category": "Government education",
+    "subjects": [
+      "Textbooks",
+      "Curriculum"
+    ],
+    "description": "State educational research, training and academic resources."
+  },
+  {
+    "name": "Maharashtra State Board",
+    "url": "https://www.mahahsscboard.in/",
+    "category": "Government education",
+    "subjects": [
+      "SSC",
+      "HSC",
+      "Maharashtra"
+    ],
+    "description": "Official Maharashtra State Board of Secondary and Higher Secondary Education."
+  },
+  {
+    "name": "Math is Fun",
+    "url": "https://www.mathsisfun.com/",
+    "category": "Maths",
+    "subjects": [
+      "Algebra",
+      "Geometry"
+    ],
+    "description": "Accessible explanations and interactive mathematics."
+  },
+  {
+    "name": "MDN Web Docs",
+    "url": "https://developer.mozilla.org/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "description": "Documentation and tutorials for web technologies."
+  },
+  {
+    "name": "MIT OpenCourseWare",
+    "url": "https://ocw.mit.edu/",
+    "category": "Courses",
+    "subjects": [
+      "Engineering",
+      "Science",
+      "Mathematics"
+    ],
+    "description": "Free course materials from MIT."
+  }
+]

@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import ShravanSearch from './ShravanSearch';
 import { ArrowUp, BookOpen, Check, ChevronDown, Clock3, Globe2, Mic, Moon, Search, Sparkles, Sun, X } from 'lucide-react';
 import { RULE_BANK } from './engine';
 import { buildContextualQuery } from './gle-v3';
@@ -13,7 +14,7 @@ const starters = [
   {mr:'कृत्रिम बुद्धिमत्ता म्हणजे काय?',en:'What is artificial intelligence?',icon:'✦'},
 ];
 
-export default function App() {
+export default function App() {\n  const [searchRoute,setSearchRoute]=useState(window.location.hash==='#/search');\n  useEffect(()=>{const sync=()=>setSearchRoute(window.location.hash==='#/search');window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);\n  if(searchRoute)return <ShravanSearch onBack={()=>{window.location.hash='';setSearchRoute(false);}}/>;
   const [query,setQuery]=useState('');
   const [turns,setTurns]=useState<Turn[]>([]);
   const [busy,setBusy]=useState(false);
@@ -45,7 +46,7 @@ export default function App() {
   return <div className={dark?'app dark':'app'}>
     <header className="topbar">
       <div className="brand" onClick={newChat} role="button" tabIndex={0}><span className="brand-mark"><Sparkles size={19}/></span><span>Factpedia <b>AI Mode</b></span></div>
-      <div className="top-actions">
+      <div className="top-actions">\n        <a className="open-search-link" href="#/search"><Search size={14}/> Shravan Search</a>
         <div className="language-select"><Globe2 size={15}/><select value={language} onChange={e=>setLanguage(e.target.value as any)} aria-label="Answer language"><option value="auto">Auto</option><option value="mr">मराठी</option><option value="en">English</option></select><ChevronDown size={13}/></div>
         <button className="icon-btn" onClick={()=>setDark(!dark)} title="Toggle theme">{dark?<Sun size={18}/>:<Moon size={18}/>}</button>
         <button className="avatar">S</button>

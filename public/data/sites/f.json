@@ -1,0 +1,14 @@
+[
+  {
+    "name": "FreeCodeCamp",
+    "url": "https://www.freecodecamp.org/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Python"
+    ],
+    "description": "Free coding lessons, projects and certifications."
+  }
+]

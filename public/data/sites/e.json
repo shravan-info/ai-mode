@@ -1,0 +1,12 @@
+[
+  {
+    "name": "edX",
+    "url": "https://www.edx.org/",
+    "category": "Courses",
+    "subjects": [
+      "University",
+      "Computer Science"
+    ],
+    "description": "Online courses and programmes from universities."
+  }
+]

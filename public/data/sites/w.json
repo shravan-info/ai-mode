@@ -1,0 +1,61 @@
+[
+  {
+    "name": "W3Schools",
+    "url": "https://www.w3schools.com/",
+    "category": "Coding",
+    "subjects": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "description": "Web development tutorials and coding examples."
+  },
+  {
+    "name": "Wikibooks",
+    "url": "https://www.wikibooks.org/",
+    "category": "Library",
+    "subjects": [
+      "Textbooks"
+    ],
+    "description": "Free textbooks and educational books."
+  },
+  {
+    "name": "Wikipedia",
+    "url": "https://www.wikipedia.org/",
+    "category": "Reference",
+    "subjects": [
+      "General knowledge"
+    ],
+    "description": "Free online encyclopedia."
+  },
+  {
+    "name": "Wikiversity",
+    "url": "https://www.wikiversity.org/",
+    "category": "Courses",
+    "subjects": [
+      "Learning projects"
+    ],
+    "description": "Collaborative learning resources and projects."
+  },
+  {
+    "name": "Wolfram Alpha",
+    "url": "https://www.wolframalpha.com/",
+    "category": "Maths",
+    "subjects": [
+      "Maths",
+      "Science",
+      "Computation"
+    ],
+    "description": "Computational knowledge engine for mathematics and science."
+  },
+  {
+    "name": "World Bank Open Data",
+    "url": "https://data.worldbank.org/",
+    "category": "Research",
+    "subjects": [
+      "Economics",
+      "Statistics"
+    ],
+    "description": "Open development data and statistics."
+  }
+]

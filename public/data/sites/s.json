@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Science Buddies",
+    "url": "https://www.sciencebuddies.org/",
+    "category": "Science",
+    "subjects": [
+      "Experiments",
+      "STEM"
+    ],
+    "description": "Science project ideas and experiments."
+  },
+  {
+    "name": "SWAYAM",
+    "url": "https://swayam.gov.in/",
+    "category": "Government education",
+    "subjects": [
+      "India",
+      "Online courses"
+    ],
+    "description": "India's national online learning platform."
+  }
+]
