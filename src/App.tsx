@@ -83,6 +83,13 @@ export default function App() {\n  const [searchRoute,setSearchRoute]=useState(w
     {menu&&<div className="history-pop"><div className="history-head">Recent searches <button onClick={()=>setMenu(false)}><X size={15}/></button></div>{history.length?history.map((h,i)=><button key={i} onClick={()=>{void ask(h);setMenu(false)}}><Clock3 size={14}/>{h}</button>):<p>No recent searches</p>}</div>}
   </div>;
 }
+export default function App() {
+  const [searchRoute,setSearchRoute]=useState(window.location.hash==='#/search');
+  useEffect(()=>{const sync=()=>setSearchRoute(window.location.hash==='#/search');window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);
+  if(searchRoute)return <ShravanSearch onBack={()=>{window.location.hash='';setSearchRoute(false);}}/>;
+  return <FactpediaApp/>;
+}
+
 function SearchBox({query,setQuery,submit,busy,compact=false}:{query:string;setQuery:(v:string)=>void;submit:(e:FormEvent)=>void;busy:boolean;compact?:boolean}) {
   return <form className={'search-box '+(compact?'compact':'')} onSubmit={submit}>
     <textarea value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();e.currentTarget.form?.requestSubmit();}}} placeholder="Ask anything… / काहीही विचारा" rows={compact?1:2}/>
