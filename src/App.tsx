@@ -14,8 +14,7 @@ const starters = [
   {mr:'कृत्रिम बुद्धिमत्ता म्हणजे काय?',en:'What is artificial intelligence?',icon:'✦'},
 ];
 
-export default function App() {\n  const [searchRoute,setSearchRoute]=useState(window.location.hash==='#/search');\n  useEffect(()=>{const sync=()=>setSearchRoute(window.location.hash==='#/search');window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);\n  if(searchRoute)return <ShravanSearch onBack={()=>{window.location.hash='';setSearchRoute(false);}}/>;
-  const [query,setQuery]=useState('');
+function FactpediaApp() {\n  const [query,setQuery]=useState('');
   const [turns,setTurns]=useState<Turn[]>([]);
   const [busy,setBusy]=useState(false);
   const [dark,setDark]=useState(false);
