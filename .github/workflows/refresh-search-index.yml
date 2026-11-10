@@ -1,0 +1,54 @@
+name: Refresh Shravan Search Index
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 2 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'data/sites-source.json'
+      - 'scripts/build-site-index.mjs'
+      - '.github/workflows/refresh-search-index.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shravan-search-index
+  cancel-in-progress: false
+
+jobs:
+  rebuild-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rebuild alphabetical website index
+        run: node scripts/build-site-index.mjs
+
+      - name: Validate application build
+        run: |
+          npm install
+          npm run build
+
+      - name: Commit updated JSON index
+        run: |
+          if git diff --quiet -- public/data/sites; then
+            echo "The website index is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/sites
+          git commit -m "chore: refresh Shravan Search index"
+          git push origin HEAD:main
